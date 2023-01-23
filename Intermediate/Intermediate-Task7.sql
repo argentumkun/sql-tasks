@@ -13,11 +13,11 @@ OrderDetails.UnitPrice AS 'UnitPrice(OrderDetails)', Products.UnitPrice AS 'Unit
 FROM Northwind.dbo.Suppliers
 JOIN Northwind.dbo.Products ON Suppliers.SupplierID = Products.SupplierID
 JOIN Northwind.dbo.OrderDetails ON Products.ProductID = OrderDetails.ProductID
-WHERE Discount >= 0.2
+WHERE Discount >= 0.2 /* should be "Discount > 0.2", I just wanted to see more records with different discount */
 ORDER BY SupplierID
 
 /*
-The second SELECT statement shows the number of delivered products (with certain discount) for each supplier.
+The second SELECT statement shows the number of delivered products (with certain discount) for each supplier (sorted by amount of products).
 But it does not sort records by discount.
 */
 

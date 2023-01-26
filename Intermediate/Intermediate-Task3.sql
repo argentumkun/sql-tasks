@@ -5,6 +5,6 @@ But instead of filtering for a particular year please use the last 12 months of 
 
 SELECT TOP 5 ShipCountry, AVG(Freight) AS AvaregeFreight
 FROM Northwind.dbo.Orders
-WHERE OrderDate BETWEEN '1997-05-06 00:00:00.000' AND '1998-05-06 00:00:00.000'
+WHERE OrderDate >= DATEADD(year, -1, (SELECT MAX(OrderDate) FROM Orders))
 GROUP BY ShipCountry
 ORDER BY AvaregeFreight DESC

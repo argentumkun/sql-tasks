@@ -14,7 +14,8 @@ OrderDetails.UnitPrice AS 'UnitPrice(OrderDetails)', Products.UnitPrice AS 'Unit
 FROM Suppliers
 JOIN Products ON Suppliers.SupplierID = Products.SupplierID
 JOIN OrderDetails ON Products.ProductID = OrderDetails.ProductID
-WHERE Discount >= 0.2 /* should be "Discount > 0.2", I just wanted to see more records with different discount */
+--WHERE Discount > 0.2 --old condition
+WHERE (1 - OrderDetails.UnitPrice / Products.UnitPrice) > 0.2
 ORDER BY SupplierID
 
 /*

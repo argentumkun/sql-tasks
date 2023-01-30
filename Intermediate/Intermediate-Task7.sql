@@ -23,7 +23,7 @@ The second SELECT statement shows the number of delivered products (with certain
 But it does not sort records by discount.
 */
 
-SELECT CompanyName, SUM(Quantity) AS TotalNumber --, AVG(1 - OrderDetails.UnitPrice / Products.UnitPrice) AS Discount
+SELECT CompanyName, SUM(Quantity) AS TotalNumber --, AVG(1 - OrderDetails.UnitPrice / Products.UnitPrice) AS ActualDiscount
 FROM Suppliers
 JOIN Products ON Suppliers.SupplierID = Products.SupplierID
 JOIN OrderDetails ON Products.ProductID = OrderDetails.ProductID

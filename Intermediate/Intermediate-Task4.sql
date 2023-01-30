@@ -12,7 +12,7 @@ INNER JOIN Customers
 ON Suppliers.PostalCode = Customers.PostalCode
 */
 
--- 2nd variant - with INTERSECT. Removes duplicates. Shows nulls.
+-- 2nd variant - with INTERSECT. This variant is preferable because it removes duplicates and shows nulls (unlike JOIN).
 
 USE Northwind
 SELECT PostalCode

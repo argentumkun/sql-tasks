@@ -14,20 +14,20 @@ OrderDetails.UnitPrice AS 'UnitPrice(OrderDetails)', Products.UnitPrice AS 'Unit
 FROM Suppliers
 JOIN Products ON Suppliers.SupplierID = Products.SupplierID
 JOIN OrderDetails ON Products.ProductID = OrderDetails.ProductID
---WHERE Discount > 0.2 --old condition
-WHERE (1 - OrderDetails.UnitPrice / Products.UnitPrice) > 0.2
+WHERE Discount > 0.2
+--WHERE (1 - OrderDetails.UnitPrice / Products.UnitPrice) > 0.2 --experimented with actual discount
 ORDER BY SupplierID
 
 /*
-The second SELECT statement shows the number of delivered products (with certain discount) for each supplier (sorted by amount of products).
-But it does not sort records by discount.
+The second SELECT statement shows the number of delivered products (with certain discount) for each supplier (sorted by amount of products and discount).
 */
 
-SELECT CompanyName, SUM(Quantity) AS TotalNumber --, AVG(1 - OrderDetails.UnitPrice / Products.UnitPrice) AS ActualDiscount
-FROM Suppliers
-JOIN Products ON Suppliers.SupplierID = Products.SupplierID
-JOIN OrderDetails ON Products.ProductID = OrderDetails.ProductID
---WHERE Discount > 0.2 --old condition
-WHERE (1 - OrderDetails.UnitPrice / Products.UnitPrice) > 0.2 --new condition that calculates actual discount
-GROUP BY Suppliers.CompanyName
-ORDER BY TotalNumber DESC
+SELECT SUM (OrderDetails.Quantity) AS Amount, Suppliers.CompanyName, OrderDetails.Discount
+FROM Products
+JOIN OrderDetails
+ON Products.ProductID = OrderDetails.ProductID
+JOIN Suppliers
+ON Products.SupplierID = Suppliers.SupplierID
+WHERE OrderDetails.Discount > 0.2
+GROUP BY Suppliers.CompanyName, OrderDetails.Discount
+ORDER BY OrderDetails.Discount DESC

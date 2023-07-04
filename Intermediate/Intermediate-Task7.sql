@@ -30,4 +30,4 @@ JOIN Suppliers
 ON Products.SupplierID = Suppliers.SupplierID
 WHERE OrderDetails.Discount > 0.2
 GROUP BY Suppliers.CompanyName, OrderDetails.Discount
-ORDER BY OrderDetails.Discount DESC
+ORDER BY OrderDetails.Discount DESC, Amount DESC
